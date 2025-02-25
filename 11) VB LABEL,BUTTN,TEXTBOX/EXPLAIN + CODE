@@ -1,0 +1,16 @@
+##EXPLAIN
+
+Design the Form (Drag & Drop Controls)
+Open the Toolbox (Ctrl + Alt + X)
+Drag the following controls onto Form1:
+Label (lblOutput) → Set Text to "Enter your name:"
+TextBox (txtInput) → Leave it empty
+Button (btnShow) → Set Text to "Show Message"
+
+## CODE
+
+Public Class Form1
+    Private Sub btnShow_Click(sender As Object, e As EventArgs) Handles btnShow.Click
+        lblOutput.Text = "Hello, " & txtInput.Text
+    End Sub
+End Class
