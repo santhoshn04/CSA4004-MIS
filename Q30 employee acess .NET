@@ -1,0 +1,81 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        // Simulate Authentication and Authorization
+        Console.WriteLine("Employee Authorization System");
+
+        // Sample Users
+        var users = new List<User>
+        {
+            new User { Id = 1, Username = "Roohi", Password = "1234", Role = "Admin" },
+            new User { Id = 2, Username = "manager", Password = "manager123", Role = "Manager" },
+            new User { Id = 3, Username = "employee", Password = "employee123", Role = "Employee" }
+        };
+
+        // Hardcoded credentials (change as needed)
+        string username = "Roohi";  // Example: username = "admin"
+        string password = "1234";  // Example: password = "admin123"
+
+        Console.WriteLine($"Attempting login with username: {username} and password: {password}");
+
+        // Authenticate user
+        var user = AuthenticateUser(username, password, users);
+        if (user != null)
+        {
+            Console.WriteLine("Authentication Successful!");
+            Console.WriteLine($"Welcome, {user.Username} ({user.Role})");
+
+            // Authorization: Show data based on role
+            ShowEmployeeData(user.Role);
+        }
+        else
+        {
+            Console.WriteLine("Invalid Credentials");
+        }
+    }
+
+    // Method to authenticate user
+    public static User AuthenticateUser(string username, string password, List<User> users)
+    {
+        var user = users.FirstOrDefault(u => u.Username == username && u.Password == password);
+        return user;
+    }
+
+    // Method to show employee data based on role
+    public static void ShowEmployeeData(string role)
+    {
+        if (role == "Admin")
+        {
+            Console.WriteLine("Admin access granted: You can see all employee data.");
+            Console.WriteLine("Displaying all employees...");
+        }
+        else if (role == "Manager")
+        {
+            Console.WriteLine("Manager access granted: You can see manager and employee data.");
+            Console.WriteLine("Displaying manager and employee data...");
+        }
+        else if (role == "Employee")
+        {
+            Console.WriteLine("Employee access granted: You can only see your own data.");
+            Console.WriteLine("Displaying your data...");
+        }
+        else
+        {
+            Console.WriteLine("No access granted.");
+        }
+    }
+}
+
+// Simple User model
+public class User
+{
+    public int Id { get; set; }
+    public string Username { get; set; }
+    public string Password { get; set; }
+    public string Role { get; set; }
+}
